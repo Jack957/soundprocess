@@ -1,5 +1,6 @@
 #include <fstream>
 #include "utils.hpp"
+#include <arma-dsp>
 
 AudioFile<double> load_audio(const std::string &filename) {
     std::ifstream ifs(filename);
@@ -60,13 +61,6 @@ void pad_audio(std::vector<arma::vec> &audio, unsigned int n_zeros, bool end) {
 
     int num_channels = audio.size();
     for (int i=0; i<num_channels; i++) {
-        b =  arma::zeros(audio[i].n_elem + n_zeros);
-        if (end) {
-            b.subvec(0, audio[i].n_elem-1) = audio[i];
-        }
-        else {
-            b.subvec(n_zeros, b.n_elem-1) = audio[i];
-        }
-        audio[i] = b;
+        audio[i] = pad_zeros(audio[i], n_zeros, end);
     }
 }
