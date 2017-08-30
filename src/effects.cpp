@@ -8,7 +8,7 @@ void single_delay(const std::vector<arma::vec> &audio, double delay_time, double
 
     int num_channels = audio.size();
     for (int i=0; i<num_channels; i++) {
-        audio_output[i] = fir_filter(audio[i], 0.0, 1.0, delay_samples);
+        audio_output[i] = wet_mix * fir_filter(audio[i], 0.0, 1.0, delay_samples) + (1.0 - wet_mix) * audio[i];
     }
 }
 
