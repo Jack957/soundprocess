@@ -1,14 +1,10 @@
-#include <fstream>
+
 #include "utils.hpp"
 #include <arma-dsp>
 
 AudioFile<double> load_audio(const std::string &filename) {
-    std::ifstream ifs(filename);
-    std::string wavfilename;
-    std::getline(ifs, wavfilename);
-
     AudioFile<double> audio_file;
-    audio_file.load(wavfilename);
+    audio_file.load(filename);
     return audioFile;
 }
 
