@@ -25,6 +25,6 @@ int main(int argc, char const *argv[]) // effect type, input, output,
     std::vector<arma::vec> arma_audiodata = convert_audio(audiodata);
     std::cout << "converted" << std::endl;
     paulstretch(arma_audiodata);
-    write_audio(arma_audiodata, out_filename, audiodata.getSampleRate(), audiodata.getBitDepth()); 
+    write_audio(arma_audiodata, out_filename, audiodata.getSampleRate(), audiodata.getBitDepth());
     return 0;
 }
