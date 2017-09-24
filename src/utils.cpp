@@ -1,6 +1,6 @@
 
 #include "utils.hpp"
-#include <arma-dsp>
+#include "arma-dsp"
 
 AudioFile<double> load_audio(const std::string &filename) {
     AudioFile<double> audio_file;
@@ -25,7 +25,7 @@ std::vector<arma::vec> convert_audio(const AudioFile<double> &audio_file) {
     return output;
 }
 
-AudioFile<double> convert_audio(const std::vector<arma::vec> &audio, int sample_rate, int bit_depth) {
+AudioFile<double> convert_audio(const std::vector<arma::vec> &audio, unsigned int sample_rate, unsigned int bit_depth) {
     int num_channels = audio.size();
     AudioFile<double>::AudioBuffer buffer;
     buffer.resize(num_channels);
@@ -43,7 +43,7 @@ AudioFile<double> convert_audio(const std::vector<arma::vec> &audio, int sample_
     return audio_file;
 }
 
-void write_audio(const std::vector<arma::vec> &audio, const std::string &filename, int sample_rate, int bit_depth) {
+void write_audio(const std::vector<arma::vec> &audio, const std::string &filename, unsigned int sample_rate, unsigned int bit_depth) {
     AudioFile<double> audio_file = convert_audio(audio, sample_rate, bit_depth);
     write_audio(audio_file, filename);
 }
@@ -57,6 +57,6 @@ void pad_audio(std::vector<arma::vec> &audio, unsigned int n_zeros, bool end) {
 
     int num_channels = audio.size();
     for (int i=0; i<num_channels; i++) {
-        audio[i] = pad_zeros(audio[i], n_zeros, end);
+        audio[i] = adsp::pad_zeros(audio[i], n_zeros, end);
     }
 }
