@@ -1,11 +1,11 @@
 
 #include "utils.hpp"
-#include "arma-dsp"
+#include "arma-dsp.hpp"
 
 AudioFile<double> load_audio(const std::string &filename) {
     AudioFile<double> audio_file;
     audio_file.load(filename);
-    return audioFile;
+    return audio_file;
 }
 
 std::vector<arma::vec> convert_audio(const AudioFile<double> &audio_file) {
@@ -13,11 +13,11 @@ std::vector<arma::vec> convert_audio(const AudioFile<double> &audio_file) {
     int num_samples = audio_file.getNumSamplesPerChannel();
 
     std::vector<arma::vec> output;
-    arma::vec channel = arma::zeros(numSamples);
+    arma::vec channel = arma::zeros(num_samples);
 
     for (int i=0; i<num_channels; i++) {
         for (int k=0; k<num_samples; k++) {
-            channel[k] = audioFile.samples[i][k];
+            channel[k] = audio_file.samples[i][k];
         }
         output.push_back(channel);
     }
@@ -48,7 +48,7 @@ void write_audio(const std::vector<arma::vec> &audio, const std::string &filenam
     write_audio(audio_file, filename);
 }
 
-void write_audio(const AudioFile<double> &audio_file, const std::string &filename) {
+void write_audio(AudioFile<double> &audio_file, const std::string &filename) {
     audio_file.save(filename);
 }
 

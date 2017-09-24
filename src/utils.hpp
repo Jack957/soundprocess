@@ -15,7 +15,7 @@ AudioFile<double> convert_audio(const std::vector<arma::vec> &audio, unsigned in
 
 void write_audio(const std::vector<arma::vec> &audio, const std::string &filename, unsigned int sample_rate=44100, unsigned int bit_depth=16);
 
-void write_audio(const AudioFile<double> &audio_file, const std::string &filename);
+void write_audio(AudioFile<double> &audio_file, const std::string &filename);
 
 void pad_audio(std::vector<arma::vec> &audio, unsigned int n_zeros, bool end=true);
 
